@@ -1,0 +1,10 @@
+{
+  "title": "데이터로 배우는 머신러닝",
+  "description": "데이터를 읽고, 직접 실험하고, 자신의 말로 설명하는 수업",
+  "courses": [
+    {"id":"penguins-classification-v1","title":"펭귄의 특징으로 종 구분하기","topic":"분류","dataset":"Palmer Penguins","description":"빈 값을 정리하고 결정트리로 세 종류의 펭귄을 분류합니다.","duration":"45–60분","activities":8,"questions":18,"href":"lesson.html","color":"forest","symbol":"P","tags":["pandas","scikit-learn"],"status":"published"}
+  ],
+  "announcements": [
+    {"id":"welcome","title":"실습을 시작하기 전에","body":"수업 카드를 열고 위에서부터 코드를 완성하세요. 첫 실행에는 Python 준비 시간이 필요합니다. 작업을 마치면 ‘내 노트북 저장’으로 기록을 내려받으세요.","label":"수업 안내"}
+  ]
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="설명, 실행 가능한 Python 코드, 웹 퀴즈를 함께 읽는 머신러닝 실습 교재">
+  <title>머신러닝 실습 교재 · 펭귄 분류</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="textbook.css">
+  <script type="module" src="app.js?v=8"></script>
+</head>
+<body class="textbook-page">
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <a class="brand" href="./"><span class="brand-mark">ml</span><span>머신러닝 실습 교재</span></a>
+    <span class="chapter-label">제 1 장 · 펭귄 분류</span>
+    <button id="help-toggle" aria-expanded="false" aria-controls="help-panel">사용 안내</button>
+  </header>
+  <aside id="help-panel" class="book-help" hidden>
+    <h2>교재 사용 안내</h2>
+    <p>코드의 <code>___</code>를 채운 뒤 <strong>실행·확인</strong>을 누르세요. 작성 힌트를 참고할 수 있습니다. <strong>자유 실험 셀 추가</strong>로 새로운 코드를 쓸 수도 있습니다. 모든 코드창은 하나의 Python 실행 환경을 공유하며 <kbd>Shift + Enter</kbd>로 실행할 수 있습니다.</p>
+    <p>첫 실행에는 Python과 sklearn을 내려받습니다. 준비 중에도 설명과 퀴즈를 읽을 수 있습니다. 퀴즈는 Python 실행 없이 바로 풀 수 있습니다.</p>
+    <p>코드와 퀴즈 답은 현재 브라우저에 자동 저장됩니다. 변수는 새로고침하면 사라지므로 01부터 다시 실행하세요. 공용 PC에서는 <strong>내 노트북 저장</strong>으로 파일을 내려받으세요.</p>
+    <p>꼬리질문은 반복 연습용입니다. 서술형은 예시와 비교하며 자동 정오 판정을 하지 않습니다. 서버에 공식 성적을 보내지 않습니다. <strong>Python 재시작</strong>은 변수만 초기화하며 작성한 코드는 유지합니다.</p>
+  </aside>
+  <div class="book-layout">
+    <aside class="chapter-sidebar" aria-label="단원 목차">
+      <p class="eyebrow">CHAPTER 01</p><h2>펭귄 데이터로<br>배우는 분류</h2>
+      <nav class="chapter-nav" aria-label="학습 단계"><a href="#overview">단원 소개</a><a href="#dataset-intro">데이터 먼저 살펴보기</a><div id="step-links"></div><a href="#reflection">내 말로 정리하기</a></nav>
+      <div class="chapter-progress"><span class="progress-label" id="progress-label">확인한 질문 0 / 16</span><progress id="quiz-progress" max="16" value="0" aria-labelledby="progress-label"></progress><small id="execution-progress">목표를 확인한 코드 0 / 8</small></div>
+      <p class="sidebar-note">나만의 노트북으로<br>생각과 실험을 기록하세요.</p>
+    </aside>
+    <main id="main" class="book-main">
+      <section id="overview" class="book-intro">
+        <p class="eyebrow">PANDAS · SCIKIT-LEARN · 약 45~60분</p>
+        <h1>몸의 특징으로<br>펭귄의 종을 구분할 수 있을까?</h1>
+        <p class="lead">수업 파일을 읽고, 코드를 완성해 결과를 관찰하세요.<br>방금 한 실습의 꼬리질문에 답하고 자유롭게 실험합니다.</p>
+        <div class="book-objectives"><strong>이번 단원의 목표</strong><p>펭귄 표의 빈 값과 잘못된 표기를 정리하고, 측정값으로 종을 분류한 뒤 평가 결과를 해석합니다.</p></div>
+        <div class="book-actions"><button id="export-notebook" class="primary" disabled>내 노트북 저장 ↓</button><button id="import-trigger" class="import-button" disabled>이전 노트북 불러오기</button><input id="import-notebook" type="file" accept=".ipynb,application/json" hidden><a href="lite/lab/index.html?path=01-penguins.ipynb" target="_blank" rel="noopener">원본 노트북 열기 ↗</a></div>
+        <p id="save-status" role="status">교재를 불러오는 중입니다.</p>
+      </section>
+      <section id="dataset-intro" class="dataset-section" aria-labelledby="dataset-title">
+        <p class="eyebrow">실습 전 · 데이터 읽기</p>
+        <h2 id="dataset-title">먼저, 어떤 데이터를 다룰까요?</h2>
+        <div id="dataset-content"></div>
+      </section>
+      <section class="runtime-bar" aria-label="Python 실행 환경">
+        <div><span class="runtime-dot" aria-hidden="true"></span><strong id="runtime-status" class="runtime-status" role="status">Python · 첫 실행 시 준비</strong><p id="runtime-detail">학습 연산은 이 PC의 브라우저에서 실행됩니다.</p></div>
+        <div class="runtime-actions"><button id="prepare-runtime" disabled>Python 준비</button><button id="restart-runtime" disabled>Python 재시작</button></div>
+      </section>
+      <p id="page-error" role="alert" hidden></p>
+      <div id="lesson-steps" aria-label="실습과 확인 퀴즈"></div>
+      <section id="reflection" class="reflection-section">
+        <p class="eyebrow">한 걸음 더</p><h2>내 말로 정리하기</h2>
+        <label for="reflection-answer">결측치와 잘못된 표기의 차이는 무엇인가요? 산점도에서 본 특징과 모델의 분류 결과를 연결해 설명해 보세요.</label>
+        <textarea id="reflection-answer" rows="5" placeholder="이번 실습에서 알게 된 점을 적어 보세요."></textarea>
+        <details><summary>다른 결과도 실험해 볼까요?</summary><p>07의 <code>max_depth=3</code>을 <code>1</code>이나 <code>6</code>으로 바꾸고 07 → 08을 다시 실행해 보세요. 정확도와 헷갈린 종은 어떻게 달라지나요?</p></details>
+        <p>수업을 마칠 때 위쪽의 <strong>내 노트북 저장</strong> 버튼으로 코드·실행 결과·퀴즈 답·정리 내용을 함께 내려받으세요.</p>
+      </section>
+      <footer class="book-footer"><p>참고: 기계학습과_데이터_분류(공유용).ipynb · 원본 CSV는 변경하지 않았습니다.</p><p>연습 기록은 현재 브라우저에 저장됩니다. HUSTOJ 제출·성적 기능은 아직 연결되지 않았습니다.</p></footer>
+    </main>
+  </div>
+  <iframe id="python-engine" class="engine-frame" title="브라우저 Python 실행 엔진" aria-hidden="true" tabindex="-1" hidden></iframe>
+</body>
+</html>

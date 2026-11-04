@@ -4,9 +4,9 @@
 - 주 도구: scikit-learn. 작은 Keras 실습은 호환성 검증 후 별도 도입.
 - 교재 흐름: 설명 → 짧은 실행 코드 → 확인 퀴즈를 반복. 한국어, 학생 눈높이.
 - 코덱스가 총괄·통합·검증을 담당하며, 구현은 클로드와 코덱스 사이에서 토큰과 작업 성격에 따라 조율.
-- 시각 디자인은 안티그래비티에 맡긴다. 기능 코드·교재 내용과 편집 영역을 분리한다.
+- 현재 사용자의 요청에 따라 전체 수업 포털 디자인은 코덱스 중심으로 설계한다. 교재 내용과 화면 스타일은 분리한다.
 - 사용자는 필요한 구현·검증을 별도 확인 질문 없이 진행하고 결과를 보고하기를 원한다. 도구 자체 권한 규칙은 준수한다.
-- 현재는 이 저장소의 로컬 프로토타입을 개발한다. 다른 호스팅 서비스에 임의로 새 프로젝트를 만들지 않는다.
+- GitHub 저장소 ivymso13/penguin-ml-textbook과 GitHub Pages에 테스트 배포한다. main push 시 자동 배포된다. 다른 호스팅 서비스는 임의로 만들지 않는다.
 - 현재 교재 내용 원본은 `scripts/course_penguins.py`이며 `scripts/create_notebook.py`로 생성한다. 생성된 `content/01-penguins.ipynb`만 직접 수정하지 않는다.
 - 빌드: `.venv/bin/python scripts/build.py`. 실행 검증: `.venv/bin/python scripts/validate_notebook.py`.
 - 브라우저 Pyodide 검증과 네이티브 Python 검증을 구분한다. 연습 퀴즈를 공식 성적이나 서버 저장으로 표현하지 않는다.

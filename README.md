@@ -78,3 +78,9 @@ node --test tests/textbook.test.mjs
 빌드 전용 의존성은 `requirements-pages.txt`입니다. 원본 그림이 든 reference 노트북과 로컬 협의 기록은 공개 저장소에서 제외합니다.
 교재·퀴즈는 공개 테스트용이며 로그인이나 교사 답안 수집 기능은 없습니다.
 외부 자료 정보는 `THIRD_PARTY.md`를 참고하세요.
+
+## 여러 데이터 수업을 위한 교실
+
+첫 화면은 수업 목록·검색·주제 필터·안내 게시판입니다. 기존 펭귄 실습 주소는 `lesson.html`입니다.
+`web/catalog.json`에서 공개 수업과 공지를 관리하며, `CLASSROOM_DESIGN.md`에 확장 구조를 정리했습니다.
+교사 초안 화면은 브라우저 저장과 JSON 파일 이동을 지원합니다. 실제 학생 대상 게시·계정·제출 기능은 아직 없습니다.
