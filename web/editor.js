@@ -1,11 +1,11 @@
-import {COURSE_STORE,MAX_CSV_BYTES,blankCourse,blankActivity,blankQuestion,readCourses,saveCourse,validateCourse,courseFile,parseCourseFile,downloadFile} from './course-format.js';
+import {COURSE_STORE,MAX_CSV_BYTES,blankCourse,blankActivity,blankQuestion,readCourses,saveCourse,deleteCourse,restoreDeletedCourse,validateCourse,courseFile,parseCourseFile,downloadFile} from './course-format.js?v=2';
 const $=s=>document.querySelector(s),status=t=>$('#editor-status').textContent=t;
 let course=blankCourse(),dirty=false;
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function changed(){dirty=true;$('#dirty-indicator').textContent='저장하지 않은 변경 있음';}
 function discardOK(){return !dirty||confirm('저장하지 않은 변경을 버리고 이동할까요?');}
 function field(title,value,update,{tag='input',rows=3,code=false}={}){const label=el('label','',title),input=el(tag,code?'code-input':'');if(tag==='textarea')input.rows=rows;input.value=value;input.addEventListener('input',()=>{update(input.value);changed();});label.append(input);return label;}
-function refreshLibrary(){const select=$('#my-courses');select.replaceChildren(new Option('저장한 수업 선택',''));readCourses().forEach(c=>select.append(new Option(c.title,c.id)));select.value=readCourses().some(c=>c.id===course.id)?course.id:'';}
+function refreshLibrary(){const select=$('#my-courses');select.replaceChildren(new Option('저장한 수업 선택',''));readCourses().forEach(c=>select.append(new Option(c.title,c.id)));const saved=readCourses().some(c=>c.id===course.id);select.value=saved?course.id:'';$('#delete-course').disabled=!saved;}
 function renderNav(){$('#activity-nav').replaceChildren(...course.activities.map((a,i)=>{const n=el('a','activity-anchor',`${String(i+1).padStart(2,'0')}. ${a.title}`);n.href=`#activity-${a.id}`;return n;}));}
 function questionEditor(q,a,index){
  const box=el('section','question-editor'),heading=el('div','panel-heading');heading.append(el('h3','',`질문 ${index+1}`));const remove=el('button','button','질문 삭제');remove.type='button';remove.onclick=()=>{a.questions=a.questions.filter(x=>x.id!==q.id);changed();renderActivities();};heading.append(remove);box.append(heading);
@@ -29,7 +29,7 @@ function move(i,d){[course.activities[i],course.activities[i+d]]=[course.activit
 function render(){
  for(const [id,key] of [['course-title','title'],['course-topic','topic'],['dataset-name','datasetName'],['description','description'],['introduction','introduction']]){$('#'+id).value=course[key];$('#'+id).oninput=()=>{course[key]=$('#'+id).value;changed();};}
  $('#csv-info').textContent=course.csv?`${course.csv.filename} · ${new TextEncoder().encode(course.csv.text).length.toLocaleString()} bytes`:'첨부한 파일 없음 · sklearn 내장 데이터로도 수업할 수 있습니다.';
- $('#remove-csv').disabled=!course.csv;renderActivities();refreshLibrary();$('#dirty-indicator').textContent=dirty?'저장하지 않은 변경 있음':'저장한 수업';
+ $('#remove-csv').disabled=!course.csv;renderActivities();refreshLibrary();$('#dirty-indicator').textContent=dirty?'저장하지 않은 변경 있음':readCourses().some(c=>c.id===course.id)?'저장한 수업':'새 수업';
 }
 function save(){try{validateCourse(course);const oldRevision=course.revision;if(dirty)course.revision=new Date().toISOString();try{saveCourse(course);}catch(error){course.revision=oldRevision;throw error;}dirty=false;$('#dirty-indicator').textContent='브라우저에 저장됨';refreshLibrary();status('저장했습니다. 다른 PC에서도 사용하려면 파일로 내보내세요.');history.replaceState(null,'',`?course=${course.id}`);return true;}catch(error){status(`저장하지 못했습니다: ${error.message}`);return false;}}
 function addActivity(){if(course.activities.length>=30){status('활동은 최대 30개입니다.');return;}const a=blankActivity();course.activities.push(a);changed();renderActivities();document.getElementById(`activity-${a.id}`).scrollIntoView({behavior:'smooth'});}
@@ -37,6 +37,9 @@ $('#add-activity').onclick=$('#add-bottom').onclick=addActivity;
 $('#save').onclick=save;$('#preview').onclick=()=>{if(save())location.href=`player.html?course=${course.id}`;};$('#export').onclick=()=>{if(save())downloadFile(`course-${course.id}.json`,courseFile(course));};
 $('#new-course').onclick=()=>{if(!discardOK())return;course=blankCourse();dirty=true;render();status('새 수업을 작성합니다.');};
 $('#copy-course').onclick=()=>{course=structuredClone(course);course.id=crypto.randomUUID();course.title+=' (복사)';course.revision=new Date().toISOString();dirty=true;render();status('별도 수업으로 복제했습니다. 저장해 주세요.');};
+$('#delete-course').onclick=()=>{
+ try{const removed=deleteCourse(course.id);if(!removed){refreshLibrary();return;}const previous={course:structuredClone(course),dirty};course=blankCourse();dirty=false;render();history.replaceState(null,'',location.pathname);const undo=el('button','button','실행 취소');status(`‘${removed.title}’ 수업을 삭제했습니다. `);$('#editor-status').append(undo);undo.onclick=()=>{try{if(!discardOK())return;restoreDeletedCourse(removed);course=previous.course;dirty=previous.dirty;render();history.replaceState(null,'',`?course=${course.id}`);status('수업을 복원했습니다.');}catch(error){status(error.message);}};}catch{status('삭제하지 못했습니다. 브라우저 저장 공간 설정을 확인하세요.');}
+};
 $('#my-courses').onchange=event=>{const id=event.target.value;if(!id)return;if(!discardOK()){refreshLibrary();return;}const saved=readCourses().find(c=>c.id===id);if(saved){course=saved;dirty=false;render();history.replaceState(null,'',`?course=${course.id}`);status('저장한 수업을 열었습니다.');}};
 $('#csv-file').onchange=async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>MAX_CSV_BYTES||! /^[a-zA-Z0-9_-]+\.csv$/.test(file.name))throw Error('영문 파일명(예: penguins.csv), 1 MB 이하의 CSV를 선택하세요.');const text=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());if(!text.trim()||text.includes('\0'))throw Error('비어 있지 않은 UTF-8 CSV 파일을 선택하세요.');course.csv={filename:file.name,text};changed();render();status(`첨부했습니다. 코드에서 pd.read_csv("${file.name}")로 읽을 수 있습니다.`);}catch(error){status(error.message);}finally{event.target.value='';}};
 $('#remove-csv').onclick=()=>{course.csv=null;changed();render();status('CSV 첨부를 해제했습니다. 코드의 파일명도 확인하세요.');};

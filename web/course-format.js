@@ -23,6 +23,9 @@ export function blankActivity(){return {id:crypto.randomUUID(),title:'새 활동
 export function blankCourse(){return {id:crypto.randomUUID(),revision:new Date().toISOString(),title:'새 데이터 수업',description:'',topic:'탐색',datasetName:'',introduction:'',csv:null,activities:[blankActivity()]};}
 export function readCourses(storage=localStorage){try{const data=JSON.parse(storage.getItem(COURSE_STORE)||'[]');return Array.isArray(data)?data.filter(c=>{try{validateCourse(c);return true;}catch{return false;}}):[];}catch{return [];}}
 export function saveCourse(c,storage=localStorage){validateCourse(c);const courses=readCourses(storage);const next=[c,...courses.filter(x=>x.id!==c.id)];storage.setItem(COURSE_STORE,JSON.stringify(next));}
+// Return the removed lesson for an explicit undo; retain student work and other courses.
+export function deleteCourse(id,storage=localStorage){const courses=readCourses(storage),removed=courses.find(c=>c.id===id);if(!removed)return null;storage.setItem(COURSE_STORE,JSON.stringify(courses.filter(c=>c.id!==id)));return removed;}
+export function restoreDeletedCourse(c,storage=localStorage){if(readCourses(storage).some(x=>x.id===c.id))throw Error('같은 ID의 수업이 이미 있습니다. 기존 수업은 덮어쓰지 않습니다.');saveCourse(c,storage);}
 export function parseCourseFile(text){const data=JSON.parse(text);if(data.format!=='data-classroom-course'||data.version!==1)throw Error('수업 편집기에서 내보낸 수업 JSON 파일을 선택하세요.');return validateCourse(data.course);}
 export function courseFile(c){validateCourse(c);return JSON.stringify({format:'data-classroom-course',version:1,course:c},null,2);}
 export function asLesson(c){return {id:`authored-${c.id}-${c.revision}`,steps:c.activities.map(a=>({...a,code:a.code,questions:a.questions.map(q=>({...q,rubric:[]}))})),dataset:{questions:[]}};}
