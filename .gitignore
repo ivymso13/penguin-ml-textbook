@@ -1,0 +1,15 @@
+.venv/
+dist/
+.jupyterlite.doit.db*
+.cache/
+__pycache__/
+artifacts/
+.DS_Store
+
+# Local orchestration and original illustrated teaching material
+reference/*.ipynb
+reviews/
+skills/
+archive/
+DESIGN_TASK.md
+DESIGN_NOTES.md

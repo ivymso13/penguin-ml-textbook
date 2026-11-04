@@ -1,0 +1,15 @@
+{
+  "jupyter-config-data": {
+    "appName": "머신러닝 실습 교재",
+    "exposeAppInBrowser": true,
+    "settingsOverrides": {
+      "@jupyterlab/application-extension:shell": {"startMode": "single"},
+      "@jupyterlab/apputils-extension:themes": {"theme": "JupyterLab Light"},
+      "@jupyterlab/notebook-extension:tracker": {
+        "codeCellConfig": {"lineNumbers": false},
+        "markdownCellConfig": {"lineNumbers": false},
+        "windowingMode": "none"
+      }
+    }
+  }
+}

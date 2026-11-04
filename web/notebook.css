@@ -1,0 +1,279 @@
+/* Textbook typography & calm styling for the embedded JupyterLite notebook */
+
+:root {
+  --jp-textbook-paper: #fbfaf6;
+  --jp-textbook-card: #ffffff;
+  --jp-textbook-ink: #1e2830;
+  --jp-textbook-heading: #141c24;
+  --jp-textbook-accent: #1e5a46;
+  --jp-textbook-accent-dark: #164636;
+  --jp-textbook-accent-subtle: #edf4f0;
+  --jp-textbook-accent-border: #bcd5c6;
+  --jp-textbook-line: #e3ded6;
+  --jp-textbook-font: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
+  --jp-textbook-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Notebook Canvas */
+.jp-Notebook {
+  background: var(--jp-textbook-paper) !important;
+  padding: 28px 24px 96px !important;
+  font-family: var(--jp-textbook-font) !important;
+  color: var(--jp-textbook-ink) !important;
+}
+
+.jp-Notebook .jp-Cell {
+  max-width: 880px !important;
+  margin-inline: auto !important;
+  margin-bottom: 16px !important;
+}
+
+/* Markdown Cells - Textbook Reading Flow */
+.jp-RenderedHTMLCommon {
+  line-height: 1.82 !important;
+  font-size: 15.5px !important;
+  color: var(--jp-textbook-ink) !important;
+  font-family: var(--jp-textbook-font) !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+}
+
+.jp-RenderedHTMLCommon h1 {
+  font-size: 26px !important;
+  font-weight: 750 !important;
+  color: var(--jp-textbook-heading) !important;
+  border-bottom: 2px solid var(--jp-textbook-line) !important;
+  padding-bottom: 12px !important;
+  margin-top: 18px !important;
+  margin-bottom: 20px !important;
+  letter-spacing: -0.025em !important;
+}
+
+.jp-RenderedHTMLCommon h2 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--jp-textbook-accent) !important;
+  margin-top: 36px !important;
+  margin-bottom: 14px !important;
+  padding-left: 12px !important;
+  border-left: 4px solid var(--jp-textbook-accent) !important;
+  letter-spacing: -0.015em !important;
+}
+
+.jp-RenderedHTMLCommon h3 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--jp-textbook-accent) !important;
+  margin-top: 24px !important;
+  margin-bottom: 10px !important;
+  letter-spacing: -0.01em !important;
+}
+
+.jp-RenderedHTMLCommon p {
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+}
+
+.jp-RenderedHTMLCommon strong {
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+.jp-RenderedHTMLCommon code {
+  font-family: var(--jp-textbook-mono) !important;
+  background: #eeebe3 !important;
+  color: #164e3f !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.88em !important;
+  border: 1px solid #dfd9cb !important;
+}
+
+.jp-RenderedHTMLCommon hr {
+  border: 0 !important;
+  border-top: 1px solid var(--jp-textbook-line) !important;
+  margin: 32px 0 24px !important;
+}
+
+.jp-RenderedHTMLCommon ul,
+.jp-RenderedHTMLCommon ol {
+  padding-left: 24px !important;
+  margin: 12px 0 16px !important;
+}
+
+.jp-RenderedHTMLCommon li {
+  margin-bottom: 6px !important;
+}
+
+/* Textbook Hint Box (details / summary) */
+.jp-RenderedHTMLCommon details {
+  background: #fdfbf7 !important;
+  border: 1px solid #e4ded3 !important;
+  border-left: 4px solid #d4982a !important;
+  border-radius: 6px !important;
+  padding: 12px 16px !important;
+  margin: 16px 0 18px !important;
+}
+
+.jp-RenderedHTMLCommon summary {
+  font-weight: 650 !important;
+  color: #7c5205 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  outline: none !important;
+}
+
+.jp-RenderedHTMLCommon summary:hover {
+  color: #5c3b00 !important;
+}
+
+.jp-RenderedHTMLCommon details[open] summary {
+  margin-bottom: 8px !important;
+  border-bottom: 1px dashed #e8dccb !important;
+  padding-bottom: 6px !important;
+}
+
+/* Code Cells - Calm Textbook Code Blocks */
+.jp-CodeCell .jp-InputArea-editor {
+  border: 1px solid #dce2e8 !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  font-family: var(--jp-textbook-mono) !important;
+  font-size: 13.5px !important;
+}
+
+.jp-Cell.jp-mod-selected .jp-InputArea-editor {
+  border-color: var(--jp-textbook-accent) !important;
+  box-shadow: 0 0 0 1.5px var(--jp-textbook-accent), 0 2px 6px rgba(30, 90, 70, 0.12) !important;
+}
+
+.jp-InputPrompt {
+  color: #7b8b98 !important;
+  font-family: var(--jp-textbook-mono) !important;
+  font-size: 12px !important;
+}
+
+.jp-OutputPrompt {
+  color: #94a3b0 !important;
+  font-family: var(--jp-textbook-mono) !important;
+  font-size: 12px !important;
+}
+
+.jp-OutputArea-output pre {
+  background: #f6f8fa !important;
+  border: 1px solid #e1e7ed !important;
+  border-radius: 6px !important;
+  padding: 12px 14px !important;
+  font-family: var(--jp-textbook-mono) !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: var(--jp-textbook-ink) !important;
+}
+
+/* Quiz Widget Styling - Textbook Quiz Problem Card */
+.jupyter-widgets.widget-vbox {
+  background: #ffffff !important;
+  border: 1.5px solid #d2ded7 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 10px rgba(30, 90, 70, 0.06) !important;
+  padding: 20px 22px !important;
+  margin: 12px 0 18px !important;
+  box-sizing: border-box !important;
+}
+
+.widget-radio-box {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  margin-bottom: 14px !important;
+}
+
+.widget-radio-box label {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 9px 14px !important;
+  border: 1px solid #e2e8e4 !important;
+  border-radius: 6px !important;
+  background: #fcfdfc !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  font-size: 14.5px !important;
+  color: var(--jp-textbook-ink) !important;
+  margin: 0 !important;
+}
+
+.widget-radio-box label:hover {
+  background: #f0f6f2 !important;
+  border-color: #b5d5c3 !important;
+}
+
+.widget-radio-box input[type="radio"] {
+  accent-color: var(--jp-textbook-accent) !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+
+.jupyter-button.widget-button {
+  background: var(--jp-textbook-accent) !important;
+  color: #ffffff !important;
+  font-family: var(--jp-textbook-font) !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 8px 18px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 3px rgba(30, 90, 70, 0.2) !important;
+  width: fit-content !important;
+}
+
+.jupyter-button.widget-button:hover {
+  background: var(--jp-textbook-accent-dark) !important;
+  box-shadow: 0 2px 6px rgba(30, 90, 70, 0.3) !important;
+}
+
+.widget-html-content {
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  margin-top: 10px !important;
+  padding: 10px 14px !important;
+  border-radius: 6px !important;
+  background: #f5f8f6 !important;
+  border-left: 4px solid var(--jp-textbook-accent) !important;
+  color: var(--jp-textbook-ink) !important;
+}
+
+/* Mobile Responsiveness for Notebook */
+@media (max-width: 600px) {
+  .jp-Notebook {
+    padding: 14px 8px 60px !important;
+  }
+  .jp-RenderedHTMLCommon {
+    font-size: 14.5px !important;
+  }
+  .jp-RenderedHTMLCommon h1 {
+    font-size: 22px !important;
+  }
+  .jp-RenderedHTMLCommon h2 {
+    font-size: 18px !important;
+    margin-top: 26px !important;
+    padding-left: 8px !important;
+  }
+  .jp-RenderedHTMLCommon h3 {
+    font-size: 15.5px !important;
+  }
+  .jupyter-widgets.widget-vbox {
+    padding: 14px 14px !important;
+  }
+  .widget-radio-box label {
+    font-size: 13.5px !important;
+    padding: 8px 10px !important;
+  }
+}

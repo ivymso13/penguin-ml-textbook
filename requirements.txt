@@ -1,0 +1,5 @@
+jupyterlite-core==0.8.2
+jupyterlite-pyodide-kernel==0.8.3
+ipywidgets==8.1.9
+jupyter-server>=2.14,<3
+scikit-learn==1.9.1

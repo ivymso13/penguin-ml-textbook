@@ -1,0 +1,581 @@
+{
+  "id": "penguins-classification-v1",
+  "legacyIds": [],
+  "title": "몸의 특징으로 펭귄의 종을 구분할 수 있을까?",
+  "notebookFile": "01-penguins.ipynb",
+  "exportFile": "my-penguins-practice.ipynb",
+  "dataset": {
+    "filename": "penguins_size.csv",
+    "rowCount": 344,
+    "columnCount": 7,
+    "inputCount": 4,
+    "columns": [
+      {
+        "name": "species",
+        "meaning": "펭귄의 종",
+        "kind": "범주형",
+        "unit": "없음",
+        "role": "정답 y"
+      },
+      {
+        "name": "island",
+        "meaning": "관측한 섬",
+        "kind": "범주형",
+        "unit": "없음",
+        "role": "배경 정보"
+      },
+      {
+        "name": "culmen_length_mm",
+        "meaning": "부리 길이",
+        "kind": "수치형",
+        "unit": "mm",
+        "role": "입력 X"
+      },
+      {
+        "name": "culmen_depth_mm",
+        "meaning": "부리 깊이(두께)",
+        "kind": "수치형",
+        "unit": "mm",
+        "role": "입력 X"
+      },
+      {
+        "name": "flipper_length_mm",
+        "meaning": "날개 길이",
+        "kind": "수치형",
+        "unit": "mm",
+        "role": "입력 X"
+      },
+      {
+        "name": "body_mass_g",
+        "meaning": "몸무게",
+        "kind": "수치형",
+        "unit": "g",
+        "role": "입력 X"
+      },
+      {
+        "name": "sex",
+        "meaning": "성별 표기",
+        "kind": "범주형",
+        "unit": "없음",
+        "role": "정리 연습용"
+      }
+    ],
+    "classes": [
+      {
+        "name": "Adelie",
+        "count": 152
+      },
+      {
+        "name": "Chinstrap",
+        "count": 68
+      },
+      {
+        "name": "Gentoo",
+        "count": 124
+      }
+    ],
+    "preview": [
+      {
+        "row": 1,
+        "values": [
+          "Adelie",
+          "Torgersen",
+          "39.1",
+          "18.7",
+          "181",
+          "3750",
+          "MALE"
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          "Adelie",
+          "Torgersen",
+          "39.5",
+          "17.4",
+          "186",
+          "3800",
+          "FEMALE"
+        ]
+      },
+      {
+        "row": 153,
+        "values": [
+          "Chinstrap",
+          "Dream",
+          "46.5",
+          "17.9",
+          "192",
+          "3500",
+          "FEMALE"
+        ]
+      },
+      {
+        "row": 154,
+        "values": [
+          "Chinstrap",
+          "Dream",
+          "50",
+          "19.5",
+          "196",
+          "3900",
+          "MALE"
+        ]
+      },
+      {
+        "row": 221,
+        "values": [
+          "Gentoo",
+          "Biscoe",
+          "46.1",
+          "13.2",
+          "211",
+          "4500",
+          "FEMALE"
+        ]
+      },
+      {
+        "row": 222,
+        "values": [
+          "Gentoo",
+          "Biscoe",
+          "50",
+          "16.3",
+          "230",
+          "5700",
+          "MALE"
+        ]
+      }
+    ],
+    "facts": [
+      [
+        "실제 수업 파일",
+        "penguins_size.csv"
+      ],
+      [
+        "원본 크기",
+        "344행 × 7열"
+      ],
+      [
+        "예측 입력",
+        "수치 측정값 4개"
+      ],
+      [
+        "예측 목표",
+        "펭귄의 종 3가지"
+      ]
+    ],
+    "previewHeaders": [
+      "기록 번호",
+      "펭귄의 종",
+      "관측한 섬",
+      "부리 길이(mm)",
+      "부리 깊이(두께)(mm)",
+      "날개 길이(mm)",
+      "몸무게(g)",
+      "성별 표기"
+    ],
+    "source": "사용자가 제공한 reference/penguins_size.csv",
+    "sourceVersion": "제공 파일 그대로 사용",
+    "sourceUrl": "https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data",
+    "sourceLabel": "원본 수업 자료에 기재된 데이터 출처 ↗",
+    "sha256": "aa728597b2228a2637e39c6f08e40a80971f4cdac7faf7bc21ff4481ee3e3ae9",
+    "missing": {
+      "species": 0,
+      "island": 0,
+      "culmen_length_mm": 2,
+      "culmen_depth_mm": 2,
+      "flipper_length_mm": 2,
+      "body_mass_g": 2,
+      "sex": 10
+    },
+    "completeRows": 334,
+    "cleanRows": 333,
+    "glossary": [
+      "culmen은 부리, flipper는 날개를 가리킵니다. 길이와 깊이는 mm, 몸무게는 g 단위입니다.",
+      "species는 Adelie·Chinstrap·Gentoo 중 하나입니다. 이번에는 종 이름 문자열을 정답 y로 그대로 사용합니다."
+    ],
+    "loaderNote": "이 실습은 내장 데이터를 불러오지 않고 pd.read_csv(\"penguins_size.csv\")로 제공한 파일을 직접 읽습니다. 브라우저 실행 환경이 준비될 때 같은 CSV를 Python 작업 폴더에 복사합니다.",
+    "properties": [
+      [
+        "df",
+        "원본 표: 344행 × 7열"
+      ],
+      [
+        "df.shape",
+        "(행 수, 열 수)"
+      ],
+      [
+        "df.dtypes",
+        "열별 자료형"
+      ],
+      [
+        "df.isna().sum()",
+        "열별 결측치 개수"
+      ],
+      [
+        "clean",
+        "이번 기준으로 정리한 표 · 남은 기록 수는 실습에서 확인"
+      ],
+      [
+        "X / y",
+        "측정값 4개 / 정답 종 이름"
+      ]
+    ],
+    "notes": [
+      "CSV 첫 줄은 열 이름이며 데이터 344행에 포함하지 않습니다. NA는 빈 값으로 읽힙니다. sex의 점(.)은 결측치가 아니라 별도로 살펴볼 문자열입니다.",
+      "species는 정답이므로 X에 넣지 않습니다. island와 sex는 이번 모델의 입력에서 제외합니다. 전처리 방식은 분석 목적에 따라 달라질 수 있습니다."
+    ],
+    "thinkPrompt": "표 한 행의 몸무게가 3750이면 단위는 무엇일까요? 예측해야 할 정답은 어느 열에 있나요?",
+    "thinkAnswer": "3750g이며, 맞혀야 할 정답은 species 열의 종 이름입니다.",
+    "questions": [
+      {
+        "id": "intro-row-v1",
+        "type": "choice",
+        "prompt": "표의 한 행은 무엇을 기록한 걸까요?",
+        "context": "아래 표에서 한 줄을 골라 읽어 보세요.",
+        "options": [
+          "펭귄 한 마리의 관측값",
+          "한 섬에 사는 펭귄의 평균",
+          "한 종의 전체 개체 수"
+        ],
+        "answer": 0,
+        "feedback": "한 행에 펭귄 한 마리의 종, 섬, 측정값, 성별이 함께 기록됩니다."
+      },
+      {
+        "id": "intro-unit-v1",
+        "type": "choice",
+        "prompt": "몸무게 3750과 날개 길이 181을 그대로 비교해도 될까요?",
+        "context": "열 이름 끝의 g와 mm를 살펴보세요.",
+        "options": [
+          "3750이 크므로 몸무게가 더 긴 값이다",
+          "단위와 측정 대상이 달라 숫자 크기만 비교할 수 없다",
+          "둘 다 펭귄의 측정값이므로 같은 단위다"
+        ],
+        "answer": 1,
+        "feedback": "body_mass_g는 g, flipper_length_mm는 mm입니다. 숫자를 읽을 때 뜻과 단위도 함께 확인하세요."
+      }
+    ]
+  },
+  "runtimeSetup": "import sys\nif sys.platform == \"emscripten\":\n    import piplite\n    await piplite.install([\"pandas\", \"matplotlib\", \"seaborn\", \"scikit-learn\"])\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.metrics import accuracy_score, confusion_matrix\nfrom IPython import get_ipython\nif get_ipython() is not None:\n    get_ipython().run_line_magic(\"matplotlib\", \"inline\")\nsns.set_theme(style=\"whitegrid\")\nplt.rcParams.update({\"figure.dpi\": 100, \"font.size\": 10})\nfrom pyodide.http import pyfetch\nfrom pathlib import Path\n_tb_response = await pyfetch(__DATA_URL__)\nif not _tb_response.ok:\n    raise RuntimeError(\"수업 CSV를 불러오지 못했습니다.\")\nPath(\"penguins_size.csv\").write_text(await _tb_response.string(), encoding=\"utf-8\")\n\"\"\"Learning feedback for the selected penguin exercises; not secure grading.\"\"\"\ndef _tb_check(number, source):\n    import ast\n    import numpy as np\n    import pandas as pd\n    try:\n        tree = ast.parse(source)\n        nodes = list(ast.walk(tree))\n        names = {n.id for n in nodes if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}\n        required = {1:{'df'},2:{'missing'},3:{'clean'},4:set(),5:{'X','y'},6:{'X_train','X_test','y_train','y_test'},7:{'model','pred','score'},8:{'cm'}}\n        if not required[number].issubset(names): return False\n        scope = globals()\n        expected = pd.read_csv('penguins_size.csv')\n        cleaned = expected.dropna()\n        cleaned = cleaned[cleaned['sex'].isin(['MALE','FEMALE'])]\n        features = ['culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g']\n        calls = [n for n in nodes if isinstance(n, ast.Call)]\n        call_name = lambda n: getattr(n.func,'attr',getattr(n.func,'id',''))\n        if number == 1: return bool(scope['df'].equals(expected))\n        if number == 2: return bool(scope['missing'].equals(expected.isna().sum()) and any(call_name(n) in ('isna','isnull') for n in calls))\n        if number == 3: return bool(scope['clean'].equals(cleaned))\n        if number == 4:\n            plots = [n for n in calls if call_name(n)=='scatterplot']\n            for plot in plots:\n                kw = {k.arg:k.value for k in plot.keywords}\n                if isinstance(kw.get('data'),ast.Name) and kw['data'].id=='clean' and isinstance(kw.get('x'),ast.Constant) and kw['x'].value=='flipper_length_mm' and isinstance(kw.get('y'),ast.Constant) and kw['y'].value=='body_mass_g' and isinstance(kw.get('hue'),ast.Constant) and kw['hue'].value=='species':\n                    return bool(scope['clean'].equals(cleaned))\n            return False\n        if number == 5: return bool(scope['X'].equals(cleaned[features]) and scope['y'].equals(cleaned['species']))\n        if number == 6:\n            return bool(len(scope['X_train'])==len(scope['y_train'])==233 and len(scope['X_test'])==len(scope['y_test'])==100 and not set(scope['X_train'].index)&set(scope['X_test'].index) and any(call_name(n)=='train_test_split' for n in calls))\n        if number == 7:\n            from sklearn.tree import DecisionTreeClassifier\n            from sklearn.metrics import accuracy_score\n            return bool(isinstance(scope['model'],DecisionTreeClassifier) and any(call_name(n)=='fit' for n in calls) and np.array_equal(scope['pred'],scope['model'].predict(scope['X_test'])) and np.isclose(scope['score'],accuracy_score(scope['y_test'],scope['pred'])))\n        if number == 8:\n            from sklearn.metrics import confusion_matrix\n            return bool(np.array_equal(scope['cm'],confusion_matrix(scope['y_test'],scope['pred'],labels=scope['labels'])) and np.asarray(scope['cm']).shape==(3,3) and int(np.asarray(scope['cm']).sum())==100 and any(call_name(n)=='heatmap' for n in calls))\n    except Exception:\n        return False\n    return False\n",
+  "referenceNotebook": "기계학습과_데이터_분류(공유용).ipynb",
+  "steps": [
+    {
+      "title": "파일을 읽고 표의 크기 확인하기",
+      "explanation": "이번에는 내장 예제가 아니라 실제 CSV 파일을 읽습니다. pandas의 read_csv()로 표를 df에 저장하고, shape와 head()로 크기와 앞부분을 확인하세요. 한 행은 펭귄 한 마리의 기록입니다.",
+      "goal": "penguins_size.csv를 df로 읽고 표의 크기와 첫 5행을 출력하세요.",
+      "codingHint": "CSV를 읽는 pandas 함수는 read_csv입니다. 파일명은 따옴표 안에 정확히 입력합니다.",
+      "questions": [
+        {
+          "id": "p1-text-cols",
+          "type": "short",
+          "prompt": "글자로 된 값을 담은 열은 몇 개인가요?",
+          "answers": [
+            "3",
+            "3개"
+          ],
+          "feedback": "글자 열은 species, island, sex 3개입니다. 나머지 4개는 mm·g 단위의 측정값입니다. NaN은 값이 비었다는 표시일 뿐이고, 열이 글자 열인지 숫자 열인지는 바뀌지 않습니다. 5단계에서 숫자 열 4개만 입력으로 고르는 이유와 이어집니다.",
+          "context": "첫 5행에서 열별 값을 비교하세요.",
+          "label": "관찰"
+        },
+        {
+          "id": "p1-unknown",
+          "type": "choice",
+          "prompt": "측정값으로 펭귄을 분류한다면, 무엇을 맞히도록 학습시킬까요?",
+          "options": [
+            "island",
+            "body_mass_g",
+            "species",
+            "culmen_length_mm"
+          ],
+          "answer": 2,
+          "feedback": "현장에서 기록하거나 잴 수 있는 값은 입력 후보이고, 아직 모르는 species가 정답(y)입니다. 예측할 때 알 수 없는 값을 입력에 넣으면 안 된다는 생각은 5단계 정답 누출 문항에서 다시 씁니다.",
+          "context": "처음 보는 펭귄에도 쓸 모델을 생각해 보세요.",
+          "label": "개념(일반)"
+        }
+      ],
+      "id": 1,
+      "code": "df = pd.___(\"penguins_size.csv\")\nprint(\"표의 크기:\", df.shape)\nprint(df.head())"
+    },
+    {
+      "title": "빈칸은 어느 열에 있을까?",
+      "explanation": "표에 값이 없는 곳을 결측치라고 합니다. isna()로 빈 값을 찾고 sum()으로 열별 개수를 셉니다. 여러 열이 같은 행에서 비어 있을 수 있으므로, 열별 개수의 합과 삭제할 행 수는 다를 수 있습니다.",
+      "goal": "열별 결측치 개수를 missing에 저장하고 확인하세요.",
+      "codingHint": "빈 값을 찾는 메서드는 isna()입니다. 열마다 True의 개수를 합치면 결측치 개수가 나옵니다.",
+      "questions": [
+        {
+          "id": "p2-overlap-why",
+          "type": "choice",
+          "prompt": "빈칸 18개가 왜 10행에서 나왔을까요?",
+          "options": [
+            "한 행에 빈칸이 여러 개 있으면, 열별로 셀 때 그 행이 여러 번 세어지기 때문이다.",
+            "isna()가 숫자 열의 빈칸 중 일부를 찾지 못했기 때문이다.",
+            "sex는 글자 열이라 '비어 있는 행'을 셀 때 빠지기 때문이다.",
+            "앞에서 일부 빈칸이 이미 지워진 뒤에 셌기 때문이다."
+          ],
+          "answer": 0,
+          "feedback": "열별 개수는 빈칸 하나하나를 세고, 두 번째 출력은 빈칸이 하나라도 있는 펭귄(행)을 셉니다. 한 펭귄에게 빈칸이 5개 있으면 열별 합에서는 5번 세어지지만 행으로는 1마리입니다. 이 단계에서는 아직 아무것도 지우지 않았습니다.",
+          "context": "열별 결측치의 합과 마지막 출력을 비교하세요.",
+          "label": "개념+출력 해석"
+        },
+        {
+          "id": "p2-deduce",
+          "type": "choice",
+          "prompt": "부리 길이가 빈 두 행의 sex는 어떤 상태일까요?",
+          "options": [
+            "둘 다 채워져 있다.",
+            "하나만 비어 있다.",
+            "지금 출력만으로는 추리할 수 없다.",
+            "둘 다 비어 있다."
+          ],
+          "answer": 3,
+          "feedback": "만약 그중 한 마리라도 sex가 채워져 있다면, sex가 빈 10마리에 그 한 마리가 더해져 비어 있는 행이 11개 이상이어야 합니다. 실제로는 10개이므로 빈칸이 있는 펭귄은 모두 sex도 빈 펭귄입니다. 자유 실험에서 df[df[\"culmen_length_mm\"].isna()]를 실행하면 두 행(번호 3, 339)의 sex가 모두 NaN입니다. 따라서 10행은 '측정값과 sex가 모두 빈 2행'과 'sex만 빈 8행'으로 나뉩니다.",
+          "context": "빈칸이 있는 행은 10개이고, sex가 빈 행도 10개입니다.",
+          "tryCode": "df[df[\"culmen_length_mm\"].isna()]",
+          "label": "추론→확인 실험"
+        }
+      ],
+      "id": 2,
+      "code": "missing = df.___().sum()\nprint(missing)\nprint(\"한 곳이라도 비어 있는 행:\", df.isna().any(axis=1).sum())"
+    },
+    {
+      "title": "빈 값과 잘못 적힌 값 정리하기",
+      "explanation": "이번 실습에서는 결측치가 있는 행을 제거합니다. 이어서 sex가 MALE 또는 FEMALE인 행만 남깁니다. 점(.)은 비어 있는 값이 아니라 문자이므로 dropna()만으로 없어지지 않습니다. 원본 df는 두고 clean을 만들어 비교합니다.",
+      "goal": "결측치를 제거하고 성별이 MALE/FEMALE인 기록만 clean에 남기세요.",
+      "codingHint": "결측치가 있는 행을 제거하는 메서드는 dropna()입니다. 이후 조건 필터가 점(.) 기록을 제외합니다.",
+      "questions": [
+        {
+          "id": "p3-dot-text",
+          "type": "choice",
+          "prompt": "dropna() 뒤에도 sex의 '.'이 남은 이유는 무엇일까요?",
+          "options": [
+            "dropna()는 숫자 열만 검사하고, 글자 열인 sex는 검사하지 않기 때문이다.",
+            "'.'은 빈칸이 아니라 누군가 실제로 입력한 글자 하나이기 때문이다.",
+            "copy()가 지워진 행을 다시 복사해 왔기 때문이다."
+          ],
+          "answer": 1,
+          "feedback": "dropna()는 NaN(값 없음)만 지웁니다. '.'은 글자이므로 '값이 있다'로 취급됩니다. 첫 번째 보기가 틀린 근거는 2단계에 있습니다. sex만 빈 8행도 dropna()로 지워졌으므로 sex 열도 검사한 것입니다. 값이 비었는지와 값이 올바른지는 따로 확인해야 하므로 isin() 필터를 한 번 더 씁니다.",
+          "context": "성별 값에서 'MALE', 'FEMALE', '.'을 확인하세요.",
+          "label": "개념(오개념 교정)"
+        },
+        {
+          "id": "p3-must-drop",
+          "type": "short",
+          "prompt": "측정값이 하나라도 빈 행은 몇 개인가요?",
+          "answers": [
+            "2",
+            "2개"
+          ],
+          "feedback": "2행입니다. 이번 교재는 원자료 노트북처럼 sex까지 정리해 10행과 '.' 1행을 지우고 333행을 씁니다. 그런데 모델 입력은 측정값 4개뿐이므로, 측정값이 빈 행만 지우면 342행을 쓸 수도 있습니다. 어느 열을 기준으로 정리할지는 무엇을 분석하느냐에 따라 정하는 선택입니다. 이번 교재는 sex까지 정리된 표를 쓰는 쪽을 골랐습니다.",
+          "context": "정리 전 df에서 측정값 4개 열만 기준으로 세어 보세요.",
+          "tryCode": "print(df[[\"culmen_length_mm\", \"culmen_depth_mm\", \"flipper_length_mm\", \"body_mass_g\"]].isna().any(axis=1).sum())",
+          "label": "실험→판단"
+        }
+      ],
+      "id": 3,
+      "code": "clean = df.___().copy()\nprint(\"빈 행 제거 후:\", len(clean))\nprint(\"성별 값:\", clean[\"sex\"].unique())\nclean = clean[clean[\"sex\"].isin([\"MALE\", \"FEMALE\"])].copy()\nprint(\"최종 기록 수:\", len(clean))"
+    },
+    {
+      "title": "산점도로 특징 비교하기",
+      "explanation": "원자료의 여러 그래프 중 산점도 하나를 골랐습니다. 가로축은 날개 길이(mm), 세로축은 몸무게(g), 색과 점 모양은 종입니다. 두 측정값만으로 종이 완전히 나뉘는지 관찰하세요. 관찰되는 관계만으로 원인과 결과를 단정하지는 않습니다.",
+      "goal": "clean으로 종별 날개 길이와 몸무게의 산점도를 그리세요.",
+      "codingHint": "data에는 결측치와 성별 표기를 정리한 표 clean을 전달하세요.",
+      "questions": [
+        {
+          "id": "p4-overlap-pair",
+          "type": "choice",
+          "prompt": "이 그림에서 가장 구분하기 어려운 두 종은 무엇일까요?",
+          "options": [
+            "Adelie와 Chinstrap",
+            "Adelie와 Gentoo",
+            "Chinstrap과 Gentoo",
+            "세 종이 모두 비슷하게 섞여 있다"
+          ],
+          "answer": 0,
+          "feedback": "Gentoo는 날개가 길고 무거운 오른쪽 위에 대체로 따로 모입니다. Adelie(날개 172~210mm)와 Chinstrap(178~212mm)은 날개 길이 범위와 몸무게 평균(약 3,710g과 3,730g)이 거의 같아서 점이 많이 섞입니다.",
+          "context": "점의 색과 모양을 비교하세요.",
+          "label": "그래프 관찰"
+        },
+        {
+          "id": "p4-try-culmen",
+          "type": "written",
+          "prompt": "가로축을 부리 길이로 바꾸면 두 종이 더 잘 구분되나요? 그림을 근거로 설명하세요.",
+          "feedback": "예시: 쉬워졌다. 부리 길이 축에서는 Adelie가 대부분 왼쪽(약 32~46mm)에, Chinstrap은 오른쪽(약 41~58mm)에 모여 날개 길이 그림보다 덜 섞인다. 다만 41~46mm 근처에는 두 종이 섞인 점이 남아 있다.\n덧붙임: 이번 그림에서는 Chinstrap과 Gentoo의 부리 길이가 비슷하지만 몸무게로는 대체로 나뉩니다. 한 측정값으로 모든 종을 나누기 어렵기 때문에 5단계에서 측정값 4개를 함께 씁니다.",
+          "context": "Adelie와 Chinstrap을 비교하세요. 실험 코드로 축을 바꿔 그려 봅니다.",
+          "tryCode": "plt.figure(figsize=(7, 4))\nsns.scatterplot(data=clean, x=\"culmen_length_mm\", y=\"body_mass_g\", hue=\"species\", style=\"species\")\nplt.title(\"Penguins: culmen length and body mass\")\nplt.xlabel(\"Culmen length (mm)\")\nplt.ylabel(\"Body mass (g)\")\nplt.tight_layout()\nplt.show()",
+          "label": "조건 변경 실험",
+          "rubric": [
+            "두 종이 그림의 어느 쪽(왼쪽·오른쪽, 위·아래)에 모였는지 위치로 적었다.",
+            "'완전히 나뉜다'고 쓰지 않고 남은 겹침도 확인했다.",
+            "원래 그림(날개 길이)과 비교하는 말이 들어 있다."
+          ],
+          "writingFrame": "원래 그림에서는 [관찰한 모습]이었다. 부리 길이 그림에서는 [달라진 모습]이 보여 구분하기 [쉬워졌다/어려워졌다/비슷했다]."
+        }
+      ],
+      "id": 4,
+      "code": "plt.figure(figsize=(7, 4))\nsns.scatterplot(data=___, x=\"flipper_length_mm\", y=\"body_mass_g\", hue=\"species\", style=\"species\")\nplt.title(\"Penguin measurements (clean records)\")\nplt.xlabel(\"Flipper length (mm)\")\nplt.ylabel(\"Body mass (g)\")\nplt.tight_layout()\nplt.show()"
+    },
+    {
+      "title": "입력과 정답 나누기",
+      "explanation": "부리 길이·부리 깊이·날개 길이·몸무게 4개를 입력 X로, species를 정답 y로 정합니다. 원자료의 MinMax 정규화는 이번 결정트리 실습에서 생략합니다. 수치의 크기를 맞추는 과정과 데이터 정리를 혼동하지 않도록 합니다.",
+      "goal": "수치 특성 4개를 X, 종을 y로 지정하세요.",
+      "codingHint": "X에는 열 이름 목록 features를 사용하고, y에는 맞혀야 할 열 이름 species를 넣습니다.",
+      "questions": [
+        {
+          "id": "p5-rows-stay",
+          "type": "short",
+          "prompt": "몸무게 열을 빼면 행 수는 어떻게 될까요? 숫자로 예측하세요.",
+          "answers": [
+            "333",
+            "333개",
+            "333행"
+          ],
+          "feedback": "333입니다. 열을 몇 개 고르든 펭귄 수(행)는 그대로이고 두 번째 숫자만 4에서 3으로 바뀝니다. X의 행 수와 y의 길이가 같아야 펭귄 한 마리의 입력과 정답이 짝을 이룹니다.",
+          "context": "열 3개만 선택합니다. 답한 뒤 실험 코드로 확인하세요.",
+          "tryCode": "clean[[\"culmen_length_mm\", \"culmen_depth_mm\", \"flipper_length_mm\"]].shape",
+          "label": "예측→확인"
+        },
+        {
+          "id": "p5-leak",
+          "type": "choice",
+          "prompt": "이 모델을 새 펭귄에게 쓰기 어려운 이유는 무엇일까요?",
+          "options": [
+            "입력이 5개로 늘어 계산이 느려지는 것이 가장 큰 문제다.",
+            "정확도 1.0은 펭귄의 특징을 완벽히 배웠다는 뜻이므로 문제가 없다.",
+            "species를 숫자로 바꾸면서 종 이름이 사라진 것이 문제다.",
+            "새 펭귄의 species는 아직 모르는 값이라 그 입력 칸을 채울 수 없다."
+          ],
+          "answer": 3,
+          "feedback": "맞혀야 할 정답을 입력에 넣는 것을 정답 누출이라고 합니다. 정확도 1.0은 측정값에서 규칙을 배운 결과가 아니라, 입력에 들어 있는 정답을 읽은 결과입니다. 1단계의 탐사대 상황처럼 실제로 예측할 때는 species를 모릅니다. 숫자로 바꾼 이유는 결정트리가 글자 열을 그대로 입력받지 못하기 때문입니다.",
+          "context": "species를 숫자로 바꿔 X에 넣었더니 평가 정확도가 1.0이 나왔습니다.",
+          "label": "개념(오개념 교정)"
+        }
+      ],
+      "id": 5,
+      "code": "features = [\"culmen_length_mm\", \"culmen_depth_mm\", \"flipper_length_mm\", \"body_mass_g\"]\nX = clean[___]\ny = clean[\"___\"]\nprint(\"입력 모양:\", X.shape)\nprint(\"정답 종류:\", y.unique())"
+    },
+    {
+      "title": "학습용과 평가용 나누기",
+      "explanation": "전체의 약 70%로 학습하고 30%로 평가합니다. stratify=y는 각 종의 비율을 가급적 유지하며 나누도록 하고, random_state=42는 같은 결과를 다시 확인하기 위한 설정입니다.",
+      "goal": "test_size=0.3으로 나누고 학습용·평가용 개수를 확인하세요.",
+      "codingHint": "30%는 소수 0.3입니다. test_size는 평가 데이터의 비율을 지정합니다.",
+      "questions": [
+        {
+          "id": "p6-why-holdout",
+          "type": "choice",
+          "prompt": "평가용 데이터를 따로 남기는 이유는 무엇일까요?",
+          "options": [
+            "학습할 데이터가 줄어야 학습 시간이 짧아지기 때문이다.",
+            "평가용 정확도가 학습용보다 높게 나오게 하기 위해서다.",
+            "학습 때 보지 못한 펭귄도 잘 맞히는지 확인하기 위해서다.",
+            "나누어 두면 결측치가 다시 섞이지 않기 때문이다."
+          ],
+          "answer": 2,
+          "feedback": "연습한 문제를 그대로 시험에 내면 실력을 알 수 없습니다. 평가용 데이터는 모델이 처음 보는 펭귄 역할을 합니다. 그래서 7단계에서 fit()에는 X_train과 y_train만 넣고, X_test는 평가할 때만 씁니다.",
+          "context": "학습용 233마리와 평가용 100마리의 역할을 생각하세요.",
+          "label": "개념(일반)"
+        },
+        {
+          "id": "p6-chinstrap",
+          "type": "choice",
+          "prompt": "평가용 100마리 중 Chinstrap은 약 몇 마리일까요?",
+          "options": [
+            "약 7마리",
+            "약 20마리",
+            "약 30마리",
+            "68마리 모두"
+          ],
+          "answer": 1,
+          "feedback": "실제로는 Chinstrap 20마리(Adelie 44, Gentoo 36)입니다. 68마리의 30%가 약 20마리이고, 100마리의 약 20%로 생각해도 됩니다. stratify를 빼고 random_state=42로 나누면 18마리가 되고, random_state를 바꾸면 16마리나 24마리처럼 달라지기도 합니다. stratify는 종의 비율을 맞추고, random_state는 같은 분할을 다시 만듭니다. 두 설정은 하는 일이 다릅니다.",
+          "context": "333마리 중 Chinstrap은 68마리입니다. 종별 비율을 유지해 나눕니다.",
+          "tryCode": "y_test.value_counts()",
+          "label": "예측→확인"
+        }
+      ],
+      "id": 6,
+      "code": "X_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=___, stratify=y, random_state=42\n)\nprint(\"학습용:\", len(X_train), \"평가용:\", len(X_test))"
+    },
+    {
+      "title": "결정트리 학습하고 평가하기",
+      "explanation": "학습용 데이터만 fit()에 전달합니다. 학습용 정확도와 평가용 정확도를 나란히 보고, 단순히 학습 문제를 잘 외운 것인지 살펴봅니다. 처음에는 나무의 깊이를 3으로 제한합니다.",
+      "goal": "결정트리를 학습하고 평가용 예측값 pred와 정확도 score를 구하세요.",
+      "codingHint": "학습은 fit(), 평가용 실제 정답은 y_test입니다. X_test와 y_test를 학습에 쓰지 않습니다.",
+      "questions": [
+        {
+          "id": "p7-read-acc",
+          "type": "choice",
+          "prompt": "평가 정확도 0.94는 무엇을 뜻할까요?",
+          "options": [
+            "학습용 233마리 중 94%를 맞혔다.",
+            "모델이 94마리의 펭귄으로 학습했다.",
+            "평가용 100마리 중 94마리의 종을 맞혔다.",
+            "앞으로 만날 펭귄도 정확히 94%를 맞힐 것이다."
+          ],
+          "answer": 2,
+          "feedback": "평가용 정확도는 평가용 100마리 중 맞힌 비율입니다. 학습용 정확도 약 0.970은 학습용 233마리 중 226마리를 맞혔다는 뜻입니다. 이 값은 한 번 나눈 결과이므로 다른 펭귄에서는 조금 달라질 수 있습니다. 8단계 혼동행렬의 대각선 칸을 더하면 맞힌 마리 수를 직접 확인할 수 있습니다.",
+          "context": "평가용 펭귄이 100마리일 때를 생각하세요.",
+          "label": "출력 의미 해석"
+        },
+        {
+          "id": "p7-depth1",
+          "type": "choice",
+          "prompt": "나무 깊이를 3에서 1로 줄이면 두 정확도는 어떻게 될까요?",
+          "options": [
+            "학습용과 평가용 모두 거의 그대로다.",
+            "학습용과 평가용 모두 크게 떨어진다.",
+            "학습용은 떨어지지만 평가용은 오른다.",
+            "학습용과 평가용 모두 1.0이 된다."
+          ],
+          "answer": 1,
+          "feedback": "기본 분할에서 깊이 1인 모델은 학습용 약 0.79, 평가용 약 0.78로 둘 다 낮아집니다. 한 번 나눈 두 잎으로 예측할 수 있는 종은 최대 두 종류이므로 세 종을 충분히 구분하기 어렵습니다. 내 실험 결과를 왼쪽 깊이 3 모델과 비교하세요. 나무를 더 깊게 하면 이번 데이터에서는 평가 정확도가 오르기도 합니다. 깊이의 적절함은 학습용 점수 하나로 판단하지 않습니다.",
+          "context": "먼저 예측하고 m1으로 실험하세요. 원래 model과 pred는 유지합니다.",
+          "tryCode": "m1 = DecisionTreeClassifier(max_depth=1, random_state=42)\nm1.fit(X_train, y_train)\nprint(\"학습용:\", m1.score(X_train, y_train), \"평가용:\", m1.score(X_test, y_test))",
+          "label": "예측→실험"
+        }
+      ],
+      "id": 7,
+      "code": "model = DecisionTreeClassifier(max_depth=3, random_state=42)\nmodel.___(X_train, y_train)\npred = model.predict(X_test)\nscore = accuracy_score(___, pred)\nprint(\"학습용 정확도:\", model.score(X_train, y_train))\nprint(\"평가용 정확도:\", score)"
+    },
+    {
+      "title": "어떤 종을 헷갈렸는지 살펴보기",
+      "explanation": "혼동행렬은 실제 종과 예측 종의 조합별 개수입니다. 행은 실제 정답, 열은 모델의 예측입니다. 대각선은 맞힌 개수, 대각선 밖은 헷갈린 개수입니다. 숫자 0도 포함해 모든 칸을 읽어 보세요.",
+      "goal": "y_test와 pred로 혼동행렬 cm을 만들고 축 이름과 함께 그리세요.",
+      "codingHint": "첫 인자는 실제 정답 y_test, 두 번째는 예측값 pred입니다. 행과 열의 방향을 바꾸지 마세요.",
+      "questions": [
+        {
+          "id": "p8-cell-locate",
+          "type": "choice",
+          "prompt": "실제 Gentoo를 Adelie로 예측한 기록은 어느 칸에 있나요?",
+          "options": [
+            "Adelie 행, Gentoo 열",
+            "Gentoo 행, Gentoo 열",
+            "Gentoo 행, Adelie 열",
+            "Adelie 열의 숫자를 모두 더한 값"
+          ],
+          "answer": 2,
+          "feedback": "행(세로축)은 실제 종, 열(가로축)은 예측한 종입니다. 이 칸은 맨 아래 행의 왼쪽 칸입니다. 첫 번째 보기는 방향을 뒤집어 읽은 칸이라, 실제 Adelie를 Gentoo로 예측한 수를 나타냅니다. 기본 실행 결과에서는 두 칸의 숫자도 다르므로 직접 확인해 보세요.",
+          "context": "행은 실제 종, 열은 예측한 종입니다.",
+          "label": "개념(표 읽기)"
+        },
+        {
+          "id": "p8-beyond-acc",
+          "type": "written",
+          "prompt": "오분류 한 칸을 읽고, 산점도에서 본 모습과 비교해 보세요.",
+          "feedback": "작성 예(한 번의 기본 실행 결과): 실제 Gentoo를 Adelie로 예측한 기록이 2마리였다. 산점도에서는 Gentoo가 대체로 따로 모였던 것과 달라서, 그 그림만으로 모델의 모든 판단을 설명하기는 어렵다. 내 숫자가 다르면 내 결과를 적습니다. 모델은 특성 4개, 산점도는 2개를 사용하므로 그림의 겹침이 오분류 원인이라고 단정하지 않습니다. 오분류가 없다면 대각선 밖이 모두 0임을 쓰고, 이번 평가 데이터에 한정된 결과임을 설명하세요.",
+          "context": "‘실제 종 → 예측 종: 마릿수’로 적으세요. 오분류가 없다면 그 의미를 설명하세요.",
+          "label": "결과 해석·연결",
+          "rubric": [
+            "행(실제)과 열(예측)을 바른 순서로 읽었다.",
+            "칸의 숫자를 내 실행 결과에서 그대로 적었다.",
+            "산점도와 비교할 때 '원인이다'라고 단정하지 않고 비슷한지 다른지만 썼다."
+          ],
+          "writingFrame": "실제 [종]을 [종]으로 예측한 기록이 [내 결과의 수]마리였다. 산점도에서 [관찰한 모습]과 비교하면 [비슷한 점/다른 점]이 있다."
+        }
+      ],
+      "id": 8,
+      "code": "labels = sorted(y.unique())\ncm = confusion_matrix(___, pred, labels=labels)\nplt.figure(figsize=(6, 4))\nsns.heatmap(cm, annot=True, fmt=\"d\", cmap=\"Blues\", xticklabels=labels, yticklabels=labels)\nplt.title(\"Penguin classifier: test records\")\nplt.xlabel(\"Predicted species\")\nplt.ylabel(\"Actual species\")\nplt.tight_layout()\nplt.show()\nprint(\"평가 기록 수:\", cm.sum())"
+    }
+  ],
+  "quizRevision": "2026-11-04-reviewed-v3-concise"
+}
